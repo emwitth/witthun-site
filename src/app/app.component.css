@@ -5,3 +5,8 @@
 .location {
   color: rgb(81, 79, 213);
 }
+
+.topbar {
+  background-color: black;
+  font-size: larger;
+}
