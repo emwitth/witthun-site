@@ -7,10 +7,10 @@ import { CommandDisplayService } from './../services/command-display.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private commandDisplayService:CommandDisplayService) { }
   command:string = "./helloWorld";
   location:string = "~";
+
+  constructor(private commandDisplayService:CommandDisplayService) { }
 
   ngOnInit(): void {
     this.commandDisplayService.changeDisplayInfo(this.location, this.command);

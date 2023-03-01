@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommandDisplayService } from './../services/command-display.service';
 
 @Component({
   selector: 'app-resume',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resume.component.css']
 })
 export class ResumeComponent implements OnInit {
+  command:string = "man Evan";
+  location:string = "~/resume";
 
-  constructor() { }
+  constructor(private commandDisplayService:CommandDisplayService) { }
 
   ngOnInit(): void {
+    this.commandDisplayService.changeDisplayInfo(this.location, this.command);
   }
 
 }
