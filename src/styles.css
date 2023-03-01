@@ -8,10 +8,9 @@ body {
 
 /* Styles for the terminal 'container' elements. */
 .terminal {
-  margin-left: 50px;
-  margin-right: 50px;
   margin-top: 10px;
   max-width: fit-content;
+  min-width: 40vw;
   position: relative;
   clear: both;
 }
@@ -31,11 +30,23 @@ body {
 }
 
 .right {
+  margin-right: 25vw;
+  margin-left: 10px;
   float: right;
 }
 
+.right:hover {
+  right: 10px;
+}
+
 .left {
-  float: left
+  margin-left: 25vw;
+  margin-right: 10px;
+  float: left;
+}
+
+.left:hover {
+  right: 10px;
 }
 
 /* Styles for cursor slide-in. */
@@ -47,10 +58,12 @@ body {
   0% {
     left: 50vw;
     opacity: .5;
+    pointer-events: none;
   }
   100% {
     left: 0px;
     opacity: 1;
+    pointer-events: none;
   }
 }
 
@@ -62,10 +75,12 @@ body {
   0% {
     right: 50vw;
     opacity: .5;
+    pointer-events: none;
   }
   100% {
     right: 0px;
     opacity: 1;
+    pointer-events: none;
   }
 }
 
