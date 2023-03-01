@@ -5,6 +5,7 @@ body {
   background-color: rgb(40, 42, 45);
 }
 
+/* Styles for the terminal 'container' elements. */
 .terminal {
   margin-left: 50px;
   margin-right: 50px;
@@ -36,7 +37,12 @@ body {
   float: left
 }
 
-.topbar {
-  background-color: black;
-  font-size: xx-large;
+/* Styles for cursor animation. */
+.cursor {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  100%, 50% { opacity: 1; }
+  49%, 0% { opacity: 0; }
 }
