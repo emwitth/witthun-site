@@ -3,6 +3,7 @@ body {
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: rgb(158, 168, 179);
   background-color: rgb(40, 42, 45);
+  overflow-x:hidden;
 }
 
 /* Styles for the terminal 'container' elements. */
@@ -35,6 +36,37 @@ body {
 
 .left {
   float: left
+}
+
+/* Styles for cursor slide-in. */
+.right {
+  animation: slide-in-right 2s ease-out;
+}
+
+@keyframes slide-in-right {
+  0% {
+    left: 50vw;
+    opacity: .5;
+  }
+  100% {
+    left: 0px;
+    opacity: 1;
+  }
+}
+
+.left {
+  animation: slide-in-left 2s ease-out;
+}
+
+@keyframes slide-in-left {
+  0% {
+    right: 50vw;
+    opacity: .5;
+  }
+  100% {
+    right: 0px;
+    opacity: 1;
+  }
 }
 
 /* Styles for cursor animation. */
