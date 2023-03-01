@@ -4,3 +4,39 @@ body {
   color: rgb(158, 168, 179);
   background-color: rgb(40, 42, 45);
 }
+
+.terminal {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 10px;
+  max-width: fit-content;
+  position: relative;
+  clear: both;
+}
+
+.terminal-top {
+  background-color: gray;
+  height: 20px;
+}
+
+.terminal-background {
+  background-color: black;
+}
+
+.terminal-contents {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left
+}
+
+.topbar {
+  background-color: black;
+  font-size: xx-large;
+}
