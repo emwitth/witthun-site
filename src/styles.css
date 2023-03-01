@@ -6,6 +6,15 @@ body {
   overflow-x:hidden;
 }
 
+/* Styles for button colors */
+.btn {
+  color: rgb(158, 168, 179);
+}
+
+.btn:hover {
+  color: rgb(94, 237, 38);
+}
+
 /* Styles for the terminal 'container' elements. */
 .terminal {
   margin-top: 10px;
