@@ -19,13 +19,16 @@ body {
 .terminal {
   margin-top: 10px;
   max-width: fit-content;
-  min-width: 40vw;
+  min-width: 50vw;
   position: relative;
-  clear: both;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 0px 0px 8px black;
 }
 
 .terminal-top {
   background-color: gray;
+  color: black;
   height: 20px;
 }
 
@@ -38,24 +41,8 @@ body {
   margin-right: 10px;
 }
 
-.right {
-  margin-right: 25vw;
-  margin-left: 10px;
-  float: right;
-}
-
-.right:hover {
-  right: 10px;
-}
-
-.left {
-  margin-left: 25vw;
-  margin-right: 10px;
-  float: left;
-}
-
-.left:hover {
-  right: 10px;
+.terminal:hover {
+  box-shadow: 0px 0px 10px;
 }
 
 /* Styles for cursor slide-in. */
