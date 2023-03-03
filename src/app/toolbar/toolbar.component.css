@@ -8,5 +8,9 @@
 
 .topbar {
   background-color: black;
-  font-size: xx-large;
+  font-size: large;
+}
+
+.cmd {
+  color: var(--TEXT-COLOR);
 }

@@ -5,7 +5,7 @@ import { CommandDisplayInfo } from '../interfaces/command-display-info';
 @Injectable({
   providedIn: 'root'
 })
-export class CommandDisplayService {
+export class ToolbarService {
   @Output() changeDisplayInfoEvent = new EventEmitter<CommandDisplayInfo>();
 
   constructor() { }

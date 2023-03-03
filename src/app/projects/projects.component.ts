@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommandDisplayService } from './../services/command-display.service';
+import { ToolbarService } from '../services/toolbar.service';
 
 @Component({
   selector: 'app-projects',
@@ -10,10 +10,10 @@ export class ProjectsComponent implements OnInit {
   command:string = "ls projects";
   location:string = "desktop/cs";
 
-  constructor(private commandDisplayService:CommandDisplayService) { }
+  constructor(private toolbarService:ToolbarService) { }
 
   ngOnInit(): void {
-    this.commandDisplayService.changeDisplayInfo(this.location, this.command);
+    this.toolbarService.changeDisplayInfo(this.location, this.command);
   }
 
 }

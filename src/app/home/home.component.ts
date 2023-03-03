@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommandDisplayService } from './../services/command-display.service';
+import { ToolbarService } from '../services/toolbar.service';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +10,10 @@ export class HomeComponent implements OnInit {
   command:string = "./helloWorld";
   location:string = "~";
 
-  constructor(private commandDisplayService:CommandDisplayService) { }
+  constructor(private toolbarService:ToolbarService) { }
 
   ngOnInit(): void {
-    this.commandDisplayService.changeDisplayInfo(this.location, this.command);
+    this.toolbarService.changeDisplayInfo(this.location, this.command);
   }
 
 }

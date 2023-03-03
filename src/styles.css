@@ -1,14 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --TEXT-COLOR: rgb(158, 168, 179);
+}
 body {
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: rgb(158, 168, 179);
+  color: var(--TEXT-COLOR);
   background-color: rgb(40, 42, 45);
   overflow-x:hidden;
 }
 
 /* Styles for button colors */
 .btn {
-  color: rgb(158, 168, 179);
+  color: var(--TEXT-COLOR);
 }
 
 .btn:hover {

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CommandDisplayService } from './command-display.service';
+import { ToolbarService } from './toolbar.service';
 
 describe('CommandDisplayService', () => {
-  let service: CommandDisplayService;
+  let service: ToolbarService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CommandDisplayService);
+    service = TestBed.inject(ToolbarService);
   });
 
   it('should be created', () => {
