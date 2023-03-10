@@ -45,15 +45,11 @@ export class ToolbarComponent implements OnInit {
     });
     
     for(let i in this.localToolbarLinks) {
-      console.log(i, this.localToolbarLinks[i])
-      console.log(this.locationChecker.isCurrentPathEqualTo(this.localToolbarLinks[i].href))
       if(this.locationChecker.isCurrentPathEqualTo(this.localToolbarLinks[i].href)) {
         this.localToolbarLinks[i].isSelected = true;
         this.selected = Number.parseInt(i);
       }
     }
-    console.log(this.locationChecker.path())
-    console.log(this.locationChecker.isCurrentPathEqualTo("/projects"));
   }
 
   selectLink(i:number) {

@@ -6,6 +6,7 @@ import { forceSimulation } from 'd3-force';
 export interface NodeData {
   id: number,
   data: string,
+  radius: number,
   x: number,
   y: number
 }
@@ -43,39 +44,150 @@ export class ResumeComponent implements OnInit, AfterViewInit {
       target: 2
     },
     {
-      source: 1,
-      target: 2
+      source: 0,
+      target: 3
     },
     {
       source: 3,
-      target: 2
+      target: 4
+    },
+    {
+      source: 3,
+      target: 5
+    },
+    {
+      source: 4,
+      target: 6
+    },
+    {
+      source: 5,
+      target: 7
+    },
+    {
+      source: 5,
+      target: 8
+    },
+    {
+      source: 1,
+      target: 9
+    },
+    {
+      source: 1,
+      target: 10
+    },
+    {
+      source: 2,
+      target: 11
+    },
+    {
+      source: 2,
+      target: 12
+    },
+    {
+      source: 2,
+      target: 13
     }
   ];
   private nodes: Array<NodeData> = [
     {
       id: 0,
-      data: "test0",
-      x: 50,
-      y: 50
+      data: "Evan Witthun",
+      radius: 100,
+      x: 0,
+      y: 0
     },
     {
       id: 1,
-      data: "test1",
-      x: 50,
-      y: 50
+      data: "Education",
+      radius: 50,
+      x: 0,
+      y: 0
     },
     {
       id: 2,
-      data: "test2",
-      x: 50,
-      y: 50
+      data: "Projects",
+      radius: 45,
+      x: 0,
+      y: 0
     },
     {
       id: 3,
-      data: "test3",
-      x: 50,
-      y: 50
+      data: "Work Experience",
+      radius: 50,
+      x: 0,
+      y: 0
+    },
+    {
+      id: 4,
+      data: "CS Work",
+      radius: 40,
+      x: 0,
+      y: 0
+    },
+    {
+      id: 5,
+      data: "Non-CS Work",
+      radius: 40,
+      x: 0,
+      y: 0
+    },
+    {
+      id: 6,
+      data: "Software Development Intern",
+      radius: 40,
+      x: 0,
+      y: 0
+    },
+    {
+      id: 7,
+      data: "Guest Service Desk",
+      radius: 40,
+      x: 0,
+      y: 0
+    },
+    {
+      id: 8,
+      data: "Front Desk Assistant",
+      radius: 40,
+      x: 0,
+      y: 0
+    },
+    {
+      id: 9,
+      data: "Bachelors in CS",
+      radius: 40,
+      x: 0,
+      y: 0
+    },
+    {
+      id: 10,
+      data: "Graduate in Software Engineering (in progress)",
+      radius: 40,
+      x: 0,
+      y: 0
+    },
+    {
+      id: 11,
+      data: "RemoraFish Capstone",
+      radius: 40,
+      x: 0,
+      y: 0
+    },
+    {
+      id: 12,
+      data: "TwixtApp",
+      radius: 40,
+      x: 0,
+      y: 0
+    },
+    {
+      id: 13,
+      data: "And More",
+      radius: 40,
+      x: 0,
+      y: 0
     }
+    
   ];
 
   constructor(private toolbarService:ToolbarService, private elem:ElementRef) { }
@@ -86,8 +198,10 @@ export class ResumeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // Set the width and height of the graph element.
-    // this.width = this.elem.nativeElement.offsetWidth;
-    // this.height = this.elem.nativeElement.offsetHeight;
+    this.width = this.elem.nativeElement.offsetWidth;
+    this.height = this.elem.nativeElement.offsetHeight;
+    console.log(this.width);
+    console.log(this.height);
     // Setup the SVG element the graph will be on.
     this.createSvg();
     this.makeGraph();
@@ -130,11 +244,16 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     // .force("charge", d3.forceManyBody().strength(300))
     // .force("x", d3.forceX().x(this.width/2))
     // .force("y", d3.forceY().y(this.height/2))
-    .force("collision", d3.forceCollide().radius(30))
+    .force("collision", d3.forceCollide().radius(d => { return (d as NodeData).radius + 15;}))
     .on("tick", () => this.tick());
   }
 
   private makeLinksAndNodes() {
+    this.nodes.forEach(node => {
+      node.x = this.width/2;
+      node.y = this.height/2;
+    });
+
     // Initialize or update the links.
     this.link = this.linkSvg
     .selectAll("line")
@@ -160,11 +279,13 @@ export class ResumeComponent implements OnInit, AfterViewInit {
       // Enter is for new nodes.
       (enter: any) => { 
         return enter.append("g")
+        // Allow user to drag. Needed because sometimes the force sim kinda sucks.
+        .call(this.drag())
         .call((parent: any) => {
           // Append a circle element to each node.
           parent.append("circle")
-          .attr("r", 20)
-          .style("fill", "RED")
+          .attr("r", (d: NodeData) => d.radius)
+          .style("fill", "GREEN")
             .attr("class", "node-border")
             // Show an indication when the mouse is over a circle.
             .on("mouseover", (d:any) => {
@@ -192,9 +313,11 @@ export class ResumeComponent implements OnInit, AfterViewInit {
             .attr("dominant-baseline", "middle")
             .attr("text-anchor", "middle")
             // Vary the size of the text depending on the size of the node.
-            .style("font-size", 20);
+            .style("font-size", (d:NodeData) => {
+              return (d.radius/10) + 10;
             });
           });
+        });
       }
 
   /**
@@ -205,22 +328,22 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     // Update the link svg position.
     this.link
     .attr("x1", (d: { source: { x: any; }; }) => {
-      var x = d.source.x;
+      var x = this.boundX(d.source.x, 0);
       d.source.x = x;
       return x; 
     })
     .attr("y1", (d: { source: { y: any; }; }) => {
-      var y = d.source.y;
+      var y = this.boundY(d.source.y, 0);
       d.source.y = y;
       return y;
     })
     .attr("x2", (d: { target: { x: any; }; }) => {
-      var x = d.target.x;
+      var x = this.boundX(d.target.x, 0);
       d.target.x = x;
       return x;
     })
     .attr("y2", (d: { target: { y: any; }; }) => {
-      var y = d.target.y;
+      var y = this.boundY(d.target.y, 0);
       d.target.y = y;
       return y; 
     });
@@ -229,7 +352,58 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     // Uses translate because g svg elements do not have coordinate attributes.
     this.g
     .attr("transform", (d: NodeData) => {
+      var x = this.boundX(d.x, d.radius);
+      var y = this.boundY(d.y, d.radius);
+      d.x = x;
+      d.y = y;
       return "translate(" + d.x + "," + d.y + ")"
     })
+  }
+
+    /**
+   * Called to implement dragging nodes.
+   * 
+   * @returns the d3 drag behavior.
+   */
+    private drag() {
+      return d3.drag()
+      .on("start", event => {
+        if(!event.active) this.simulation.alphaTarget(0.1).restart();
+        event.subject.fx = event.subject.x;
+        event.subject.fy = event.subject.y;
+      })
+      .on("drag", event => {
+        event.subject.fx = event.x;
+        event.subject.fy = event.y;
+      })
+      .on("end", event => {
+        if(!event.active) this.simulation.alphaTarget(0);
+        event.subject.fx = null;
+        event.subject.fy = null;
+      });
+    }
+
+  /**
+   * Calculates the y position and adjusts if it is outside the bound of the graph area.
+   * 
+   * @param y the y position of a node
+   * @param r the radius of the node
+   * @returns the new position of y that is within the graph area (adjusted by the size of the node)
+   */
+  private boundY(y:number|null|undefined, r:number): number {
+    var newR: number = r;
+    return Math.max(newR, Math.min(this.height-newR, y ? y : 0));
+  }
+
+  /**
+   * Calculates the x position and adjusts if it is outside the bound of the graph area.
+   * 
+   * @param x the x position of a node
+   * @param r the radius of the node
+   * @returns the new position of x that is within the graph area (adjusted by the size of the node)
+   */
+  private boundX(x:number|null|undefined, r:number): number {
+    var newR: number = r;
+    return Math.max(newR, Math.min(this.width-newR, x ? x : 0));
   }
 }
