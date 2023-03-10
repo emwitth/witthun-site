@@ -23,6 +23,8 @@ export class ResumeComponent implements OnInit, AfterViewInit {
   private g: any;
   private simulation: any;
 
+  details:Array<string> = ["Click a node to see more about it."];
+
   constructor(private toolbarService:ToolbarService, private elem:ElementRef, private resume:ResumeData) { }
 
   ngOnInit(): void {
@@ -73,7 +75,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     console.log(this.resume.nodes);
     this.simulation = forceSimulation(this.resume.nodes)
     .force("link", d3.forceLink()
-    .id(d => { return (d as Node).data; })
+    .id(d => { return (d as Node).name; })
     .links(this.resume.links)
     )
     // .force("charge", d3.forceManyBody().strength(300))
@@ -114,6 +116,10 @@ export class ResumeComponent implements OnInit, AfterViewInit {
       // Enter is for new nodes.
       (enter: any) => { 
         return enter.append("g")
+        .on("click", (d:any) => {
+          console.log(d);
+          this.details = (d.target.__data__ as Node).details;
+        })
         // Allow user to drag. Needed because sometimes the force sim kinda sucks.
         .call(this.drag())
         .call((parent: any) => {
@@ -134,7 +140,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
             parent.append("text")
             .style("fill", "WHITE")
             .text((d: Node) => {
-                  return d.data;
+                  return d.name;
                 }
               )
             // Show an indication when the mouse is over a circle.
@@ -226,8 +232,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
    * @returns the new position of y that is within the graph area (adjusted by the size of the node)
    */
   private boundY(y:number|null|undefined, r:number): number {
-    var newR: number = r;
-    return Math.max(newR, Math.min(this.height-newR, y ? y : 0));
+    return Math.max(r, Math.min(this.height-r, y ? y : 0));
   }
 
   /**
@@ -238,7 +243,6 @@ export class ResumeComponent implements OnInit, AfterViewInit {
    * @returns the new position of x that is within the graph area (adjusted by the size of the node)
    */
   private boundX(x:number|null|undefined, r:number): number {
-    var newR: number = r;
-    return Math.max(newR, Math.min(this.width-newR, x ? x : 0));
+    return Math.max(this.width*.25 + 10 + r, Math.min(this.width-r, x ? x : 0));
   }
 }

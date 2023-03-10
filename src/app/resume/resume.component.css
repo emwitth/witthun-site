@@ -1,3 +1,14 @@
 .graph {
   height: calc(100vh - 38px);
 }
+
+.resume-terminal {
+  margin-left: 10px !important;
+  min-width: 25vw !important;
+  max-width: 25vw !important;
+  position: fixed;
+}
+
+.resume-terminal-height {
+  height: 90vh;
+}

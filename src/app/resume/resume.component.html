@@ -1,1 +1,15 @@
+<div class="terminal resume-terminal rounded">
+  <div class="terminal-top rounded-top"></div>
+  <div class="terminal-background rounded-bottom">
+    <div class="terminal-contents resume-terminal-height">
+      <div *ngFor="let detail of details;">
+        <br *ngIf="detail === ' '">
+        <p *ngIf="!'*-:'.includes(detail[0])">{{detail.substring(0)}}</p>
+        <h3 *ngIf="detail[0] == '*'">{{detail.substring(1)}}</h3>
+        <h5 *ngIf="detail[0] == '-'">{{detail.substring(1)}}</h5>
+        <a *ngIf="detail[0] == ':'" href="{{detail.substring(1)}}">{{detail.substring(9)}}</a>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="graph" class="graph"></div>
