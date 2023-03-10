@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ResumeComponent } from './resume/resume.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ResumeData } from './resume/resume-items';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { ProjectsComponent } from './projects/projects.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ResumeData],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,19 +2,7 @@ import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { ToolbarService } from '../services/toolbar.service';
 import * as d3 from 'd3';
 import { forceSimulation } from 'd3-force';
-
-export interface NodeData {
-  id: number,
-  data: string,
-  radius: number,
-  x: number,
-  y: number
-}
-
-export interface ForceLink {
-  source: number,
-  target: number
-}
+import { Node, ResumeData } from './resume-items';
 
 @Component({
   selector: 'app-resume',
@@ -34,163 +22,8 @@ export class ResumeComponent implements OnInit, AfterViewInit {
   private link: any;
   private g: any;
   private simulation: any;
-  private links: Array<ForceLink> = [
-    {
-      source: 0,
-      target: 1
-    },
-    {
-      source: 0,
-      target: 2
-    },
-    {
-      source: 0,
-      target: 3
-    },
-    {
-      source: 3,
-      target: 4
-    },
-    {
-      source: 3,
-      target: 5
-    },
-    {
-      source: 4,
-      target: 6
-    },
-    {
-      source: 5,
-      target: 7
-    },
-    {
-      source: 5,
-      target: 8
-    },
-    {
-      source: 1,
-      target: 9
-    },
-    {
-      source: 1,
-      target: 10
-    },
-    {
-      source: 2,
-      target: 11
-    },
-    {
-      source: 2,
-      target: 12
-    },
-    {
-      source: 2,
-      target: 13
-    }
-  ];
-  private nodes: Array<NodeData> = [
-    {
-      id: 0,
-      data: "Evan Witthun",
-      radius: 100,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 1,
-      data: "Education",
-      radius: 50,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 2,
-      data: "Projects",
-      radius: 45,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 3,
-      data: "Work Experience",
-      radius: 50,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 4,
-      data: "CS Work",
-      radius: 40,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 5,
-      data: "Non-CS Work",
-      radius: 40,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 6,
-      data: "Software Development Intern",
-      radius: 40,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 7,
-      data: "Guest Service Desk",
-      radius: 40,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 8,
-      data: "Front Desk Assistant",
-      radius: 40,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 9,
-      data: "Bachelors in CS",
-      radius: 40,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 10,
-      data: "Graduate in Software Engineering (in progress)",
-      radius: 40,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 11,
-      data: "RemoraFish Capstone",
-      radius: 40,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 12,
-      data: "TwixtApp",
-      radius: 40,
-      x: 0,
-      y: 0
-    },
-    {
-      id: 13,
-      data: "And More",
-      radius: 40,
-      x: 0,
-      y: 0
-    }
-    
-  ];
 
-  constructor(private toolbarService:ToolbarService, private elem:ElementRef) { }
+  constructor(private toolbarService:ToolbarService, private elem:ElementRef, private resume:ResumeData) { }
 
   ngOnInit(): void {
     this.toolbarService.changeDisplayInfo(this.location, this.command);
@@ -228,8 +61,8 @@ export class ResumeComponent implements OnInit, AfterViewInit {
 
     this.initializeSimulation();
 
-    this.simulation.nodes(this.nodes);
-    this.simulation.force("link").links(this.links);
+    this.simulation.nodes(this.resume.nodes);
+    this.simulation.force("link").links(this.resume.links);
     this.simulation.alpha(.6).restart();
   }
 
@@ -237,19 +70,21 @@ export class ResumeComponent implements OnInit, AfterViewInit {
    * Initializes the simulation. 
    */
   private initializeSimulation() {
-    this.simulation = forceSimulation(this.nodes)
+    console.log(this.resume.nodes);
+    this.simulation = forceSimulation(this.resume.nodes)
     .force("link", d3.forceLink()
-    .links(this.links)
+    .id(d => { return (d as Node).data; })
+    .links(this.resume.links)
     )
     // .force("charge", d3.forceManyBody().strength(300))
     // .force("x", d3.forceX().x(this.width/2))
     // .force("y", d3.forceY().y(this.height/2))
-    .force("collision", d3.forceCollide().radius(d => { return (d as NodeData).radius + 15;}))
+    .force("collision", d3.forceCollide().radius(d => { return (d as Node).radius + 15;}))
     .on("tick", () => this.tick());
   }
 
   private makeLinksAndNodes() {
-    this.nodes.forEach(node => {
+    this.resume.nodes.forEach(node => {
       node.x = this.width/2;
       node.y = this.height/2;
     });
@@ -257,7 +92,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     // Initialize or update the links.
     this.link = this.linkSvg
     .selectAll("line")
-    .data(this.links, (l: any) => {return l.source + l.target;})
+    .data(this.resume.links, (l: any) => {return l.source + l.target;})
     .join("line")
     .style("stroke", "WHITE")
     .style("stroke-width", "3px")
@@ -272,8 +107,8 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     // Initialize or update the nodes.
     this.g = this.nodeSvg
     .selectAll("g")
-    .data(this.nodes, (d: any) => {
-      return d.id;
+    .data(this.resume.nodes, (d: any) => {
+      return d.data;
     })
     .join(
       // Enter is for new nodes.
@@ -284,7 +119,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
         .call((parent: any) => {
           // Append a circle element to each node.
           parent.append("circle")
-          .attr("r", (d: NodeData) => d.radius)
+          .attr("r", (d: Node) => d.radius)
           .style("fill", "GREEN")
             .attr("class", "node-border")
             // Show an indication when the mouse is over a circle.
@@ -298,7 +133,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
             // Append some text to the node. Either ip, server name, or program name.
             parent.append("text")
             .style("fill", "WHITE")
-            .text((d: NodeData) => {
+            .text((d: Node) => {
                   return d.data;
                 }
               )
@@ -313,7 +148,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
             .attr("dominant-baseline", "middle")
             .attr("text-anchor", "middle")
             // Vary the size of the text depending on the size of the node.
-            .style("font-size", (d:NodeData) => {
+            .style("font-size", (d:Node) => {
               return (d.radius/10) + 10;
             });
           });
@@ -351,7 +186,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     // Update the node position. 
     // Uses translate because g svg elements do not have coordinate attributes.
     this.g
-    .attr("transform", (d: NodeData) => {
+    .attr("transform", (d: Node) => {
       var x = this.boundX(d.x, d.radius);
       var y = this.boundY(d.y, d.radius);
       d.x = x;
