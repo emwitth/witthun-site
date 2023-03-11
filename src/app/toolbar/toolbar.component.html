@@ -1,20 +1,18 @@
-<div>
-  <div class="d-flex topbar">
-    <div class="btn cmd">
-      <span class="user">evan@witthun.dev</span>
-      <span class="cmd">:</span>
-      <span class="location">{{location}}</span>
-      <span>$ {{command}}</span>
-    </div>
-    <div *ngFor="let link of localToolbarLinks; index as i;">
-      <a class="btn btm-primary" routerLink="{{link.href}}" 
-      [ngClass]="{'user': link.isSelected}" (click)="selectLink(i)">{{link.name}}</a>
-    </div>
-    <a class="btn" href="https://www.github.com/emwitth">
-      <i class="bi bi-github"></i>
-    </a>
-    <a class="btn" href="https://www.youtube.com/channel/UCzvkgj3TFEnhLRAaKmt4MPQ">
-      <i class="bi bi-youtube"></i>
-    </a>
+<div class="d-flex topbar sticky-top">
+  <div class="btn cmd">
+    <span class="user">evan@witthun.dev</span>
+    <span class="cmd">:</span>
+    <span class="location">{{location}}</span>
+    <span>$ {{command}}</span>
   </div>
+  <div *ngFor="let link of localToolbarLinks; index as i;">
+    <a class="btn btm-primary" routerLink="{{link.href}}" 
+    [ngClass]="{'user': link.isSelected}" (click)="selectLink(i)">{{link.name}}</a>
+  </div>
+  <a class="btn" href="https://www.github.com/emwitth">
+    <i class="bi bi-github"></i>
+  </a>
+  <a class="btn" href="https://www.youtube.com/channel/UCzvkgj3TFEnhLRAaKmt4MPQ">
+    <i class="bi bi-youtube"></i>
+  </a>
 </div>
