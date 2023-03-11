@@ -25,11 +25,11 @@ export class ResumeData {
       name: "Education",
       details: [
         "*Eductation",
-        "-Graduate Degree in Software Engineering",
+        "+Masters Degree in Software Engineering",
         "In Progress",
         "Expected graduation May 2023",
         " ",
-        "-BS in Computer Science",
+        "+BS in Computer Science",
         "With an emphasis in Security",
         "Minor: Mathematics",
         "From: University of Wisconsin, La Crosse",
@@ -40,7 +40,7 @@ export class ResumeData {
           name: "Bachelors in CS",
           details: [
             "*Bachelors of Science",
-            "-In Computer Science",
+            "+In Computer Science",
             "With an emphasis in Security",
             "Minor: Mathematics",
             "From: University of Wisconsin, La Crosse",
@@ -50,7 +50,7 @@ export class ResumeData {
           children: []
         },
         {
-          name: "Graduate in Software Engineering (in progress)",
+          name: "Masters in Software Eng.",
           details: [
             "*Graduate Degree",
             "*Software Engineering",
@@ -63,7 +63,27 @@ export class ResumeData {
     },
     {
       name: "Projects",
-      details: [],
+      details: [
+        "*Projects",
+        "+RemoraFish (Capstone)",
+        ":https://github.com/emwitth/capstone-frontend",
+        ":https://github.com/emwitth/capstone-backend",
+        " ",
+        "+TwixTApp",
+        ":https://github.com/emwitth/TWIXTapp",
+        " ",
+        "+This Website",
+        ":https://github.com/emwitth/witthun-site",
+        " ",
+        "+Morriscare Nursing Agency",
+        ":https://github.com/emwitth/morriscare",
+        " ",
+        "+Hotdraw",
+        ":https://github.com/emwitth/hotdraw",
+        " ",
+        "+Etc",
+        "A c-based chat server (unfinished)."
+      ],
       children: [
         {
           name: "RemoraFish",
@@ -80,7 +100,7 @@ export class ResumeData {
           children: []
         },
         {
-          name: "TwixtApp",
+          name: "TwixTApp",
           details: [
             "*TwixT App",
             "Twixt is a cool game made in the 1962.",
@@ -97,39 +117,171 @@ export class ResumeData {
           children: []
         },
         {
+          name: "This Website",
+          details: [
+            "This website is built on Angular "
+            +"and it's hosted on a rasperry pi 3 I won "
+            +"during a coding competition in high school. "
+            +"The system to make the graph is pretty cool, "
+            +"and I also use similar code on my capstone. ",
+            "I have plans to create a module just for making " 
+            +"this graph, which uses d3, easier to make.",
+            "You can find the code on my github:",
+            ":https://github.com/emwitth/witthun-site"
+          ],
+          children: []
+        },
+        {
           name: "And More",
-          details: [],
+          details: [
+            "My other less notable projects are... ",
+            "A simple webapp for a nursing agency. "
+            +"I developed the frontend and did my best "
+            +"dealing with the backend without complaining. "
+            +"I am happy with the look, but some of the functionality "
+            +"could be improved.",
+            ":https://github.com/emwitth/morriscare",
+            "-----",
+            "An implementation of hotdraw based on this paper:",
+            ":https://dl.acm.org/doi/10.1145/3361149.3361185",
+            "It isn't too fancy, but it was a lot of fun.",
+            ":https://github.com/emwitth/hotdraw",
+            "----",
+            "A c-based chat server (unfinished)."
+          ],
           children: []
         }
       ]
     },
     {
       name: "Work Experience",
-      details: [],
+      details: [
+        "+Software Development Intern",
+        "Where: Trane Technologies (LaCrosse)",
+        "When: June 2021 - present",
+        "----",
+        "+Service Desk",
+        "Where: Festival Foods (Baraboo, WI)",
+        "When:May 2019 - January 2020",
+        "----",
+        "+Front Desk Assistant",
+        "+Wentz Hall, La Crosse, WI",
+        "Spring 2020",
+        "+Reuter Hall, La Crosse, WI",
+        "Fall 2020 - Spring 20201",
+        "----",
+        "+Pizza Ranch",
+        "(front of house/register/pizza)",
+        "Baraboo",
+        "Summer 2017 - Winter 2020",
+        "----",
+        "+Summer Custodial Maintenance",
+        "Baraboo School District",
+        "Summer 2015 - 2018"
+      ],
       children:[
         {
           name: "CS Work",
-          details: [],
+          details: [
+            "*Software Development Intern",
+            "----",
+            "+Where: Trane Technologies (LaCrosse)",
+            "+When: June 2021 - present",
+            "Worked as a full stack intern online "
+            +"developing proprietary webapp (dmc) for Trane Technologies.",
+            "Worked with international developer team.",
+            "Worked in a develompent team using Scrum."
+          ],
           children: [
             {
               name: "Software Development Intern",
-              details: [],
+              details: [
+                "*Software Development Intern",
+                "----",
+                "+Where: Trane Technologies (La Crosse, WI)",
+                "+When: June 2021 - present",
+                "Worked as a full stack intern online "
+                +"developing proprietary webapp (dmc) for Trane Technologies.",
+                "Worked with international developer team.",
+                "Worked in a develompent team using Scrum."
+              ],
               children: []
             }
           ]
         },
         {
           name: "Non-CS Work",
-          details: [],
+          details: [
+            "+Service Desk",
+            "Where: Festival Foods (Baraboo, WI)",
+            "When:May 2019 - January 2020",
+            "----",
+            "+Front Desk Assistant",
+            "+Wentz Hall, La Crosse, WI",
+            "Spring 2020",
+            "+Reuter Hall, La Crosse, WI",
+            "Fall 2020 - Spring 20201",
+            "----",
+            "+Pizza Ranch",
+            "(front of house/register/pizza)",
+            "Baraboo",
+            "Summer 2017 - Winter 2020",
+            "----",
+            "+Summer Custodial Maintenance",
+            "Baraboo School District",
+            "Summer 2015 - 2018"
+          ],
           children: [
             {
               name: "Guest Service Desk",
-              details: [],
+              details: [
+                "*Service Desk",
+                "+Where: Festival Foods (Baraboo, WI)",
+                "+When: May 2019 - January 2020",
+                "Dealt with customers issues.",
+                "Helped Manage cashier staff."
+              ],
+              children: []
+            },
+            {
+              name: "Pizza Ranch",
+              details: [
+                "*Pizza Ranch",
+                "+Where: Pizza Ranch (Baraboo, WI)",
+                "+When: Summer 2017 - Winter 2020",
+                "Pizza, Cash Register, Phones, Customer Service",
+                "Maintain Buffets"
+              ],
               children: []
             },
             {
               name: "Front Desk Assistant",
-              details: [],
+              details: [
+                "*Front Desk Assistant",
+                "+Where: Wentz Hall, La Crosse, WI",
+                "When: Spring 2020",
+                "+Were: Reuter Hall, La Crosse, WI",
+                "When: Fall 2020-Spring 20201",
+                "----",
+                "Sorted mail, checked students in/out, "
+                +"made and sold frozen pizzas, "
+                +"and managed drunk kids some nights.",
+                "Got payed to do homework, honestly."
+              ],
+              children: []
+            },
+            {
+              name: "Summer Custodial Maintenance",
+              details: [
+                "*Summer Custodial Maintenance",
+                "+Where: Baraboo School District (Baraboo, WI)",
+                "+When: Summer 2015 - 2018",
+                "Quickly clean and move furniture.",
+                "Deep clean classrooms.",
+                " ",
+                "Note: Never look under a desk in an "
+                +"elementary school unless you want nightmares."
+              ],
               children: []
             }
           ]
